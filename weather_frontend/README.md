@@ -27,6 +27,51 @@ Launches the test runner in interactive watch mode.
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
+## Fetching Icons from Figma (SVG/PNG)
+
+A utility script is included to download specific icon components from a Figma file and save them into `weather_frontend/assets/`.
+
+- Script path: `scripts/fetch-figma-assets.js`
+- NPM script: `npm run fetch:figma`
+
+### Prerequisites
+- Figma personal access token (API key)
+
+### How to get required IDs
+- API Key: In Figma, Help > Account Settings > Personal access tokens.
+- File ID: From the file URL: `https://www.figma.com/file/<FILE_ID>/<File-Name>`
+- Node/Component IDs:
+  - In Figma, select the component/layer.
+  - Right-click > Copy/Paste as > Copy link (URL contains `node-id=...`).
+  - Alternatively, use Dev Mode to view the node id, or the Figma API `GET /v1/files/:file_key` to discover nodes.
+
+### Usage via environment variables
+```
+FIGMA_API_KEY=your_token \
+FIGMA_FILE_ID=your_file_id \
+FIGMA_NODE_IDS="10:2,10:3" \
+FIGMA_IMAGE_FORMATS="svg,png" \
+FIGMA_PNG_SCALE=2 \
+OUTPUT_DIR="./assets/icons" \
+npm run fetch:figma
+```
+
+### Usage via CLI flags
+```
+node scripts/fetch-figma-assets.js \
+  --token your_token \
+  --file your_file_id \
+  --nodes "10:2,10:3" \
+  --formats svg,png \
+  --scale 2 \
+  --out ./assets/icons
+```
+
+Notes:
+- Formats can be `svg`, `png`, or both (comma-separated).
+- For PNGs, you may set a scale (1..4). Default is 1.
+- Assets will be saved with filenames based on the node IDs (sanitized).
+
 ## Customization
 
 ### Colors
