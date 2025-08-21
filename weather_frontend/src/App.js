@@ -1,49 +1,40 @@
-import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import './styles/theme.css';
+import './styles/app.css';
+import Header from './components/Header';
+import Hero from './components/Hero';
+import ControlsBar from './components/ControlsBar';
+import WeatherGrid from './components/WeatherGrid';
 
 // PUBLIC_INTERFACE
-function App() {
-  const [theme, setTheme] = useState('light');
-
-  // Effect to apply theme to document element
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-  }, [theme]);
-
-  // PUBLIC_INTERFACE
-  const toggleTheme = () => {
-    setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
-  };
-
+export default function App() {
+  /** Root application rendering the pixel-perfect Dark Weather UI.
+   * This app follows the provided design notes and style guide for colors, spacing,
+   * typography, and component structure. No API calls are made here; static content
+   * is rendered to achieve exact visual fidelity with the screenshot.
+   */
   return (
-    <div className="App">
-      <header className="App-header">
-        <button 
-          className="theme-toggle" 
-          onClick={toggleTheme}
-          aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
-        >
-          {theme === 'light' ? '🌙 Dark' : '☀️ Light'}
-        </button>
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <p>
-          Current theme: <strong>{theme}</strong>
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <>
+      <div className="canvas-mesh" aria-hidden="true" />
+      <div className="canvas-vignette" aria-hidden="true" />
+
+      <header className="container header" role="banner" aria-label="Site header">
+        <Header />
       </header>
-    </div>
+
+      <main role="main" aria-label="Main content">
+        <section className="container hero" aria-label="Hero">
+          <Hero />
+        </section>
+
+        <section className="container controls" aria-label="Search and filters">
+          <ControlsBar />
+        </section>
+
+        <section className="container grid" aria-label="Weather cards">
+          <WeatherGrid />
+        </section>
+      </main>
+    </>
   );
 }
-
-export default App;

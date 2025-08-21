@@ -1,0 +1,100 @@
+/* Theme variables and global canvas styling based on style_guide.md and weather_app_design_notes.md */
+:root {
+  --bg-canvas: #0C1A22;
+  --bg-canvas-2: #0E2330;
+  --mesh-line: rgba(58,126,140,0.14);
+  --panel: rgba(17,31,39,0.65);
+  --panel-strong: rgba(20,36,45,0.8);
+  --panel-hover: rgba(26,44,55,0.9);
+  --card: rgba(20,36,45,0.7);
+  --text-primary: rgba(255,255,255,0.92);
+  --text-secondary: rgba(255,255,255,0.7);
+  --text-tertiary: rgba(255,255,255,0.55);
+  --accent: #2EC4B6;
+  --accent-2: #4FD1C5;
+  --chip-bg: rgba(33,52,63,0.9);
+  --chip-border: rgba(255,255,255,0.08);
+  --input-bg: rgba(18,32,40,0.9);
+  --input-placeholder: rgba(255,255,255,0.45);
+  --cta: #6EC3FF;
+  --cta-text: #0A1920;
+  --btn-bg: rgba(24,41,51,0.9);
+  --btn-border: rgba(255,255,255,0.08);
+  --success: #47D16E;
+  --warning: #FDBA21;
+  --warning-2: #FF8C1A;
+  --cool: #8EC6FF;
+  --divider: rgba(255,255,255,0.06);
+
+  --radius-8: 8px;
+  --radius-10: 10px;
+  --radius-12: 12px;
+  --radius-16: 16px;
+  --radius-18: 18px;
+  --radius-20: 20px;
+
+  --shadow-card: 0 18px 40px rgba(0,0,0,0.35);
+  --shadow-cta: 0 8px 18px rgba(110,195,255,0.25);
+
+  --container-max: 1180px;
+  --gutter: 40px;
+  --gutter-sm: 24px;
+
+  --font-primary: "Helvetica Neue", Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  color: var(--text-primary);
+  font-family: var(--font-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background:
+    radial-gradient(80% 60% at 50% 0%, var(--bg-canvas) 0%, var(--bg-canvas-2) 100%),
+    linear-gradient(180deg, var(--bg-canvas) 0%, var(--bg-canvas-2) 100%);
+  background-attachment: fixed;
+  position: relative;
+}
+
+/* Decorative mesh lines layer */
+.canvas-mesh {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    radial-gradient(1000px 600px at -200px -200px, var(--mesh-line) 0.5px, transparent 0.6px),
+    radial-gradient(900px 540px at calc(100% + 200px) -150px, var(--mesh-line) 0.5px, transparent 0.6px);
+  background-repeat: no-repeat;
+  opacity: 0.22;
+  filter: blur(0.2px);
+}
+
+/* Vignette corners */
+.canvas-vignette {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(120% 100% at 50% 0%, transparent 60%, rgba(0,0,0,0.25) 100%);
+  z-index: 0;
+}
+
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding-inline: var(--gutter);
+}
+
+.container.sm {
+  padding-inline: var(--gutter-sm);
+}
+
+@media (max-width: 1024px) {
+  .container { padding-inline: var(--gutter-sm); }
+}
